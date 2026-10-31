@@ -4,240 +4,549 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil Kampus STT Cipasung</title>
+    <title>HTML Learning Project</title>
     <!-- Bootstrap 5.0.2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <!-- Google Font Plus Jakarta Sans & Icons -->
+    <!-- Google Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
         :root {
-            --brand-primary: #003366;
-            --brand-dark: #002244;
-            --brand-hover: #0055a5;
+            --primary-indigo: #4f46e5;
+            --primary-purple: #7c3aed;
+            --bg-body: #f4f6f9;
         }
 
         body {
             font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-            background-color: #f4f6f8;
-            color: #333;
+            background-color: var(--bg-body);
+            color: #333333;
+            line-height: 1.6;
         }
 
-        html {
-            scroll-behavior: smooth;
+        .main-container {
+            max-width: 850px;
+            margin: 0 auto;
         }
 
-        /* Custom Card Hover Animation */
-        .card {
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-            border: 1px solid rgba(0, 0, 0, 0.08) !important;
+        /* Header Accent Gradient */
+        .header {
+            background: linear-gradient(135deg, var(--primary-indigo) 0%, var(--primary-purple) 100%);
+            color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.25);
         }
 
-        .card:hover {
+        /* Card Custom Styling & Micro-interactions */
+        .card,
+        .card-pink {
+            background: #ffffff;
+            border-radius: 16px;
+            border: 1px solid rgba(229, 231, 235, 0.8) !important;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card:hover,
+        .card-pink:hover {
             transform: translateY(-4px);
-            box-shadow: 0 0.8rem 1.5rem rgba(0, 51, 102, 0.08) !important;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08) !important;
         }
 
-        /* Header Accent */
-        #main-header {
-            background: linear-gradient(135deg, #003366 0%, #001f3f 100%);
+        .card-pink {
+            background-color: #fff5f7 !important;
+            border-color: #fce7f3 !important;
         }
 
-        /* Heading Underline Style */
-        .card h2 {
-            color: var(--brand-primary);
-            position: relative;
-            padding-bottom: 8px;
-            margin-top: 0;
+        .card-header {
+            background: transparent;
             border-bottom: none;
-            /* override CSS lama */
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #1f2937;
+            padding: 0 0 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .card h2::after {
-            content: '';
+        /* Callout Box Variants */
+        .callout-gradient {
+            background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+            border-left: 4px solid #6366f1;
+            padding: 18px 22px;
+            border-radius: 10px;
+            margin: 16px 0;
+        }
+
+        .callout-blue {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            color: #ffffff;
+            border-left: none;
+            box-shadow: 0 8px 20px rgba(2, 132, 199, 0.2);
+            border-radius: 16px;
+        }
+
+        .callout-reset {
+            background: #f8fafc;
+            border-left: 4px solid #0ea5e9;
+        }
+
+        /* Code Block Styling */
+        .code-box {
+            position: relative;
+            background-color: #0f172a;
+            color: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 16px 0;
+            overflow-x: auto;
+        }
+
+        .code-badge {
             position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 50px;
-            height: 3px;
-            background-color: var(--brand-primary);
-            border-radius: 2px;
+            top: 10px;
+            right: 12px;
+            background: #334155;
+            color: #94a3b8;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
         }
 
-        /* Nav link custom hover */
-        .navbar .nav-link {
-            color: rgba(255, 255, 255, 0.85) !important;
-            transition: all 0.2s ease;
+        pre {
+            font-family: 'Fira Code', Consolas, Monaco, monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+
+        /* Inline Badges & Code Tags */
+        .tag-code {
+            background-color: #e0e7ff;
+            color: #3730a3;
+            padding: 2px 8px;
             border-radius: 6px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.88em;
+            font-weight: 600;
         }
 
-        .navbar .nav-link:hover {
-            color: #ffffff !important;
-            background-color: var(--brand-hover);
+        .callout-blue .tag-code {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
         }
 
-        /* Button Custom */
-        .contact-form button {
-            background-color: var(--brand-primary);
+        .status-badge {
+            background-color: #dcfce7;
+            color: #166534;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Text Formatting Preview Box */
+        .formatting-box {
+            background: #fafafa;
+            border: 1px dashed #d1d5db;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        /* Form Controls Custom Focus */
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+        }
+
+        .btn-submit {
+            background: var(--primary-indigo);
             color: white;
+            padding: 10px 20px;
             border: none;
-            transition: all 0.25s ease;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            width: 100%;
         }
 
-        .contact-form button:hover {
-            background-color: var(--brand-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 34, 68, 0.25);
+        .btn-submit:hover {
+            background: #4338ca;
+            color: white;
+            transform: translateY(-1px);
         }
 
-        /* Event item card accent */
-        .event-item {
-            background-color: #f8f9fa;
-            border-left: 4px solid var(--brand-primary);
-            transition: transform 0.2s ease;
+        /* Summary Box */
+        .summary-box {
+            background: #1e1b4b;
+            color: #ffffff;
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(30, 27, 75, 0.2);
         }
 
-        .event-item:hover {
-            transform: translateX(4px);
+        .summary-highlight {
+            margin-top: 12px;
+            font-weight: 600;
+            color: #38bdf8 !important;
         }
     </style>
 </head>
 
-<body class="py-3 py-md-4">
+<body class="py-4 py-md-5">
 
-    <div class="container" style="max-width: 960px;">
+    <div class="main-container container px-3">
 
-        <header id="main-header" class="text-center text-white p-4 p-md-5 rounded-bottom shadow-sm mb-3">
-            <h1 class="fw-bold display-6 mb-1">STT Cipasung</h1>
-            <p class="subtitle fst-italic mb-0" style="color: #dbe7f3;">Sekolah Tinggi Teknologi Cipasung, Tasikmalaya
-            </p>
-        </header>
+        <!-- Header -->
+        <div class="header text-center p-4 p-md-5 mb-4">
+            <h1 class="fw-bold display-6 mb-2">🌐 HTML Learning Project</h1>
+            <p class="mb-0 fs-5 opacity-90">A comprehensive guide to HTML fundamentals</p>
+        </div>
 
-        <nav class="navbar navbar-expand-md rounded shadow-sm mb-4 p-2" style="background-color: var(--brand-dark);">
-            <ul class="nav nav-pills w-100 justify-content-center gap-1 gap-md-2">
-                <li class="nav-item"><a href="#about" class="nav-link fw-medium px-3 py-2">Tentang Kami</a></li>
-                <li class="nav-item"><a href="#programs" class="nav-link fw-medium px-3 py-2">Program Studi</a></li>
-                <li class="nav-item"><a href="#facilities" class="nav-link fw-medium px-3 py-2">Fasilitas</a></li>
-                <li class="nav-item"><a href="#events" class="nav-link fw-medium px-3 py-2">Agenda</a></li>
-                <li class="nav-item"><a href="#contact" class="nav-link fw-medium px-3 py-2">Kontak</a></li>
-            </ul>
-        </nav>
+        <!-- Section 1: What is HTML? -->
+        <div class="card p-4 p-md-4 mb-4 shadow-sm">
+            <div class="card-header">
+                <span class="icon">🚀</span> What is HTML?
+            </div>
+            <p class="section-desc text-secondary mb-3">HTML stands for HyperText Markup Language. It is the standard
+                markup language for
+                creating Web pages.</p>
 
-        <main>
-            <section id="about" class="card shadow-sm rounded-3 p-4 mb-4">
-                <h2 class="h4 fw-bold mb-3">Tentang Kami</h2>
-                <p class="mb-2 text-secondary">STT Cipasung adalah sekolah tinggi teknologi di Tasikmalaya, Jawa Barat,
-                    yang didirikan pada tahun 1997
-                    di bawah Yayasan Pondok Pesantren Cipasung.</p>
-                <p class="mb-0 text-secondary">Kampus ini menyelenggarakan program sarjana di bidang teknik dan
-                    komputasi.</p>
-            </section>
-
-            <section id="programs" class="card shadow-sm rounded-3 p-4 mb-4">
-                <h2 class="h4 fw-bold mb-3">Program Studi</h2>
-                <div class="table-responsive">
-                    <table class="table table-hover table-striped align-middle border program-table mb-0 mt-2">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Program Studi</th>
-                                <th>Jenjang</th>
-                                <th>Masa Studi</th>
-                                <th>Fokus</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="fw-semibold">Teknik Industri</td>
-                                <td>Sarjana (S1)</td>
-                                <td>4 tahun</td>
-                                <td>Sistem produksi, mutu, dan ergonomi</td>
-                            </tr>
-                            <tr>
-                                <td class="fw-semibold">Informatika</td>
-                                <td>Sarjana (S1)</td>
-                                <td>4 tahun</td>
-                                <td>Perangkat lunak, jaringan, dan data</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <section id="facilities" class="card shadow-sm rounded-3 p-4 mb-4">
-                <h2 class="h4 fw-bold mb-3">Fasilitas</h2>
-                <ul class="list-group list-group-flush facility-list mb-3">
-                    <li class="list-group-item px-0 text-secondary d-flex align-items-center">
-                        <i class="bi bi-check-circle-fill text-primary me-2"></i>Laboratorium komputer
-                    </li>
-                    <li class="list-group-item px-0 text-secondary d-flex align-items-center">
-                        <i class="bi bi-check-circle-fill text-primary me-2"></i>Laboratorium teknik industri
-                    </li>
-                    <li class="list-group-item px-0 text-secondary d-flex align-items-center">
-                        <i class="bi bi-check-circle-fill text-primary me-2"></i>Perpustakaan
-                    </li>
-                    <li class="list-group-item px-0 text-secondary d-flex align-items-center">
-                        <i class="bi bi-check-circle-fill text-primary me-2"></i>Masjid
-                    </li>
-                    <li class="list-group-item px-0 text-secondary d-flex align-items-center">
-                        <i class="bi bi-check-circle-fill text-primary me-2"></i>Sekretariat kegiatan mahasiswa
-                    </li>
+            <div class="callout-gradient my-3">
+                <h4 class="fw-bold text-indigo mb-2" style="color: #312e81;">Key Points:</h4>
+                <ul class="mb-0 ps-3">
+                    <li class="mb-1">Standard markup language</li>
+                    <li class="mb-1">Describes the structure of a Web page</li>
+                    <li>Consists of a series of elements</li>
                 </ul>
-                <img src="https://sttcipasung.ac.id/wp-content/uploads/2018/09/41942263_1524874994325517_8078385218039316480_n-1-960x540.jpg"
-                    alt="Gedung Kampus STT Cipasung Tasikmalaya"
-                    class="img-fluid rounded shadow-sm responsive-img my-2">
-            </section>
+            </div>
 
-            <section id="events" class="card shadow-sm rounded-3 p-4 mb-4">
-                <h2 class="h4 fw-bold mb-3">Agenda Mendatang</h2>
-                <article class="event-item rounded-3 p-3 mb-3 shadow-sm">
-                    <h3 class="h5 fw-bold text-dark mb-1">Informatics Coding Day</h3>
-                    <p class="mb-2"><span class="badge bg-primary px-2 py-1"><time datetime="2026-11-14">14 November
-                                2026</time></span></p>
-                    <p class="mb-0 text-secondary">Lomba pemrograman satu hari yang terbuka untuk semua mahasiswa.</p>
-                </article>
-                <article class="event-item rounded-3 p-3 mb-0 shadow-sm">
-                    <h3 class="h5 fw-bold text-dark mb-1">Open House</h3>
-                    <p class="mb-2"><span class="badge bg-primary px-2 py-1"><time datetime="2026-12-05">5 Desember
-                                2026</time></span></p>
-                    <p class="mb-0 text-secondary">Kunjungi laboratorium kami dan bertemu dengan para dosen.</p>
-                </article>
-            </section>
+            <p class="section-desc section-desc-bold fw-bold text-dark mt-3 mb-1">How HTML works:</p>
+            <p class="section-desc text-secondary mb-3">HTML elements tell the browser how to display the content.</p>
 
-            <section id="contact" class="card shadow-sm rounded-3 p-4 mb-4">
-                <h2 class="h4 fw-bold mb-3">Kontak</h2>
-                <address class="fst-normal bg-light p-3 rounded-3 border mb-4 text-secondary">
-                    Jalan Raya Cisinga KM 1, Cilampunghilir, Padakembang, Tasikmalaya, Jawa Barat 46466<br>
-                    Email: <a href="mailto:info@sttcipasung.ac.id"
-                        class="text-primary text-decoration-none fw-medium">info@sttcipasung.ac.id</a> · Telepon: (0265)
-                    2550424
-                </address>
+            <div class="code-box">
+                <span class="code-badge">HTML</span>
+                <pre>&lt;p&gt;This is a paragraph.&lt;/p&gt;</pre>
+            </div>
+        </div>
 
-                <form action="#" method="post" class="contact-form">
-                    <p class="mb-3">
-                        <label for="name" class="form-label fw-semibold mb-1">Nama:</label>
-                        <input type="text" id="name" name="name" class="form-control" required>
-                    </p>
-                    <p class="mb-3">
-                        <label for="email" class="form-label fw-semibold mb-1">Email:</label>
-                        <input type="email" id="email" name="email" class="form-control" required>
-                    </p>
-                    <p class="mb-3">
-                        <label for="message" class="form-label fw-semibold mb-1">Pesan:</label>
-                        <textarea id="message" name="message" class="form-control" rows="4" required></textarea>
-                    </p>
-                    <button type="submit" class="btn btn-primary px-4 py-2 rounded-3 fw-semibold">Kirim</button>
+        <!-- Section 2: Basic HTML Structure -->
+        <div class="card p-4 p-md-4 mb-4 shadow-sm">
+            <div class="card-header">
+                <span class="icon">📄</span> Basic HTML Structure
+            </div>
+            <p class="section-desc text-secondary mb-3">Every HTML document has a required structure:</p>
+
+            <div class="code-box">
+                <span class="code-badge">HTML</span>
+                <pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;My First Heading&lt;/h1&gt;
+    &lt;p&gt;My first paragraph.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+            </div>
+
+            <div class="callout-gradient my-3">
+                <h4 class="fw-bold mb-2" style="color: #312e81;">Structure Breakdown:</h4>
+                <ul class="mb-0 ps-3">
+                    <li class="mb-1"><span class="tag-code">&lt;!DOCTYPE html&gt;</span> Defines that this document is
+                        an HTML5
+                        document</li>
+                    <li class="mb-1"><span class="tag-code">&lt;html&gt;</span> The root element of an HTML page</li>
+                    <li class="mb-1"><span class="tag-code">&lt;head&gt;</span> Contains meta information about the HTML
+                        page</li>
+                    <li><span class="tag-code">&lt;body&gt;</span> Defines the document's body</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 3: Essential HTML Tags -->
+        <div class="card p-4 p-md-4 mb-4 shadow-sm">
+            <div class="card-header">
+                <span class="icon">📌</span> Essential HTML Tags
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle custom-table mb-0 mt-2">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="text-uppercase text-muted small fw-semibold">Tag</th>
+                            <th class="text-uppercase text-muted small fw-semibold">Description</th>
+                            <th class="text-uppercase text-muted small fw-semibold">Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="tag-code">&lt;h1&gt;-&lt;h6&gt;</span></td>
+                            <td>Defines HTML headings</td>
+                            <td><code>&lt;h1&gt;Heading 1&lt;/h1&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag-code">&lt;p&gt;</span></td>
+                            <td>Defines a paragraph</td>
+                            <td><code>&lt;p&gt;Text&lt;/p&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag-code">&lt;a&gt;</span></td>
+                            <td>Defines a hyperlink</td>
+                            <td><code>&lt;a href="#"&gt;Link&lt;/a&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag-code">&lt;img&gt;</span></td>
+                            <td>Defines an image</td>
+                            <td><code>&lt;img src="pic.jpg"&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag-code">&lt;ul&gt;/&lt;ol&gt;</span></td>
+                            <td>Defines lists</td>
+                            <td><code>&lt;ul&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ul&gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag-code">&lt;div&gt;</span></td>
+                            <td>Defines a section</td>
+                            <td><code>&lt;div&gt;Content&lt;/div&gt;</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Section 4: Text Formatting -->
+        <div class="card p-4 p-md-4 mb-4 shadow-sm">
+            <div class="card-header">
+                <span class="icon">✍️</span> Text Formatting
+            </div>
+
+            <div class="formatting-box">
+                <h1 class="h3 fw-bold text-dark mb-2">This is an H1 heading</h1>
+                <h2 class="h5 fw-semibold text-secondary mb-3">Heading 2 Example</h2>
+                <p class="mb-3">This is a standard paragraph with <strong>bold</strong>, <em>italic</em>,
+                    <u>underlined</u>, and
+                    <code>code</code> text.
+                </p>
+                <p class="mb-2"><strong>List Examples:</strong></p>
+                <ul class="mb-3 ps-4">
+                    <li>Bullet point 1</li>
+                    <li>Bullet point 2</li>
+                </ul>
+                <ol class="mb-0 ps-4">
+                    <li>Numbered item 1</li>
+                    <li>Numbered item 2</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Section 5: HTML Forms -->
+        <div class="card p-4 p-md-4 mb-4 shadow-sm">
+            <div class="card-header">
+                <span class="icon">📝</span> HTML Forms
+            </div>
+            <p class="section-desc text-secondary mb-3">Forms are used to collect user input:</p>
+
+            <div class="code-box">
+                <span class="code-badge">HTML</span>
+                <pre>&lt;form action="/submit" method="post"&gt;
+  &lt;label for="name"&gt;Name:&lt;/label&gt;
+  &lt;input type="text" id="name" name="name"&gt;
+  &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</pre>
+            </div>
+
+            <div class="form-container bg-white border rounded-3 p-4 mt-3">
+                <h4 class="h5 fw-bold text-dark mb-3">Contact Us</h4>
+                <form onsubmit="return false;">
+                    <div class="mb-3 form-group">
+                        <label class="form-label fw-semibold text-secondary small">Name:</label>
+                        <input type="text" class="form-control" placeholder="Enter your name">
+                    </div>
+                    <div class="mb-3 form-group">
+                        <label class="form-label fw-semibold text-secondary small">Email:</label>
+                        <input type="email" class="form-control" placeholder="Enter your email">
+                    </div>
+                    <div class="mb-3 form-group">
+                        <label class="form-label fw-semibold text-secondary small">Subject:</label>
+                        <select class="form-select">
+                            <option>Select a subject</option>
+                            <option>General Inquiry</option>
+                            <option>Support</option>
+                        </select>
+                    </div>
+                    <div class="mb-3 form-group">
+                        <label class="form-label fw-semibold text-secondary small">Message:</label>
+                        <textarea class="form-control" rows="3" placeholder="Type your message here..."></textarea>
+                    </div>
+                    <button class="btn btn-submit py-2 fw-semibold">Submit Form</button>
                 </form>
-            </section>
-        </main>
+            </div>
+        </div>
 
-        <footer>
-            <p class="text-center text-muted small py-3 mb-0">&copy; 2026 STT Cipasung</p>
-        </footer>
+        <!-- Section 6: HTML Attributes -->
+        <div class="card p-4 p-md-4 mb-4 shadow-sm">
+            <div class="card-header">
+                <span class="icon">🏷️</span> HTML Attributes
+            </div>
+            <p class="section-desc text-secondary mb-3">Attributes provide additional information about elements:</p>
+
+            <div class="code-box">
+                <span class="code-badge">HTML</span>
+                <pre>&lt;a href="https://example.com" target="_blank" class="btn"&gt;Visit Site&lt;/a&gt;
+&lt;img src="image.jpg" alt="Description" width="300" height="200"&gt;</pre>
+            </div>
+
+            <div class="callout-gradient my-3">
+                <h4 class="fw-bold mb-2" style="color: #312e81;">Common Attributes:</h4>
+                <ul class="mb-0 ps-3">
+                    <li class="mb-1"><span class="tag-code">href</span> Specifies the URL for a link</li>
+                    <li class="mb-1"><span class="tag-code">src</span> Specifies the path to an image</li>
+                    <li class="mb-1"><span class="tag-code">alt</span> Specifies alternate text for an image</li>
+                    <li class="mb-1"><span class="tag-code">class</span> Specifies class names for elements</li>
+                    <li class="mb-1"><span class="tag-code">id</span> Specifies unique id for an element</li>
+                    <li><span class="tag-code">style</span> Specifies inline CSS styles</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 7: Media in HTML -->
+        <div class="card p-4 p-md-4 mb-4 shadow-sm">
+            <div class="card-header">
+                <span class="icon">🖼️</span> Media in HTML
+            </div>
+            <p class="section-desc text-secondary mb-3">HTML supports various media elements:</p>
+
+            <div class="code-box">
+                <span class="code-badge">HTML</span>
+                <pre>&lt;img src="pic.jpg" alt="Picture"&gt;
+&lt;audio controls&gt;&lt;source src="audio.mp3" type="audio/mpeg"&gt;&lt;/audio&gt;
+&lt;video width="320" height="240" controls&gt;&lt;source src="movie.mp4"&gt;&lt;/video&gt;</pre>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle custom-table mb-0 mt-2">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="text-uppercase text-muted small fw-semibold">Media</th>
+                            <th class="text-uppercase text-muted small fw-semibold">Tag</th>
+                            <th class="text-uppercase text-muted small fw-semibold">Attr</th>
+                            <th class="text-uppercase text-muted small fw-semibold">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Images</td>
+                            <td><span class="tag-code">&lt;img&gt;</span></td>
+                            <td>src, alt</td>
+                            <td><span class="status-badge">✔ Active</span></td>
+                        </tr>
+                        <tr>
+                            <td>Audio</td>
+                            <td><span class="tag-code">&lt;audio&gt;</span></td>
+                            <td>src, controls</td>
+                            <td><span class="status-badge">✔ Active</span></td>
+                        </tr>
+                        <tr>
+                            <td>Video</td>
+                            <td><span class="tag-code">&lt;video&gt;</span></td>
+                            <td>src, controls</td>
+                            <td><span class="status-badge">✔ Active</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Section 8: Practical Examples -->
+        <div class="card-pink p-4 p-md-4 mb-4 shadow-sm">
+            <div class="card-header">
+                <span class="icon">💡</span> Practical Examples
+            </div>
+
+            <h4 class="h6 fw-bold text-dark mt-2 mb-2">Common Tasks:</h4>
+            <ul class="ps-3 mb-3">
+                <li class="mb-1">Creating a navigation bar using <span class="tag-code">&lt;nav&gt;</span> dan <span
+                        class="tag-code">&lt;ul&gt;</span></li>
+                <li class="mb-1">Building a simple contact form</li>
+                <li>Making a responsive card layout</li>
+            </ul>
+
+            <h4 class="h6 fw-bold text-dark mb-2">Best Practices:</h4>
+            <ul class="ps-3 mb-0">
+                <li class="mb-1">Always use semantic HTML tags</li>
+                <li class="mb-1">Include <span class="tag-code">alt</span> attributes for images</li>
+                <li class="mb-1">Keep HTML clean and properly indented</li>
+                <li>Validate your HTML code</li>
+            </ul>
+        </div>
+
+        <!-- Section 9: Project Structure -->
+        <div class="card p-4 p-md-4 mb-4 shadow-sm">
+            <div class="card-header">
+                <span class="icon">📁</span> Project Structure
+            </div>
+            <p class="section-desc text-secondary mb-3">Recommended folder layout for web projects:</p>
+
+            <div class="code-box">
+                <pre>project-folder/
+├── index.html
+├── css/
+│   └── styles.css
+├── js/
+│   └── main.js
+└── images/
+    ├── logo.png
+    └── banner.jpg</pre>
+            </div>
+        </div>
+
+        <!-- Section 10: Next Steps in Your Learning Journey -->
+        <div class="callout-gradient callout-blue p-4 mb-4">
+            <div class="callout-title h5 fw-bold mb-2">
+                <span>🎯</span> Next Steps in Your Learning Journey
+            </div>
+            <p class="callout-subtitle opacity-90 mb-3">Recommended path:</p>
+            <ul class="callout-list ps-3 mb-0">
+                <li class="mb-1">Master CSS for styling and page layout</li>
+                <li class="mb-1">Learn JavaScript to add interactivity</li>
+                <li class="mb-1">Explore responsive web design principles</li>
+                <li>Build real-world projects to solidify skills</li>
+            </ul>
+        </div>
+
+        <!-- Section 11: Developer Tools -->
+        <div class="card p-4 p-md-4 mb-4 shadow-sm">
+            <div class="card-header">
+                <span class="icon">🔧</span> Developer Tools
+            </div>
+            <div class="callout-gradient callout-reset my-1">
+                <h4 class="fw-bold text-dark mb-2">Recommended Tools:</h4>
+                <ul class="mb-0 ps-3">
+                    <li class="mb-1">Code Editor (VS Code, Sublime Text)</li>
+                    <li class="mb-1">Browser Developer Tools (F12)</li>
+                    <li class="mb-1">HTML Validators (W3C)</li>
+                    <li>Extension & Plugins (Live Server)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Footer / Summary -->
+        <div class="summary-box p-4 p-md-5">
+            <h3 class="h4 fw-bold mb-3"><span>🌟</span> Summary & Conclusion</h3>
+            <p class="mb-2 text-white-50">HTML is the backbone of web development. Master these concepts and you'll have
+                a solid foundation for
+                learning CSS and JavaScript!</p>
+            <p class="summary-highlight mb-0">Keep practicing, build projects, and keep learning!</p>
+        </div>
 
     </div>
 
